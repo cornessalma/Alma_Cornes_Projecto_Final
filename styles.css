@@ -1,0 +1,178 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f5f5f5;
+    color: #0c0c0c;
+    padding: 16px;
+}
+
+
+.registro-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 680px;
+    margin: 2rem auto;
+}
+
+.registro-card h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #357e99;
+    margin-bottom: 0.25rem;
+    text-align: center;
+}
+
+
+.registro-card h1 + p {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+
+
+#registroForm fieldset {
+    border: 2px solid #3f78c3;
+    border-radius: 10px;
+    padding: 1.5rem;
+}
+
+
+#registroForm fieldset > div {
+    margin-bottom: 1.2rem;
+}
+
+#registroForm fieldset > div:last-child {
+    margin-bottom: 0;
+}
+
+
+#registroForm label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #1e293b;
+    text-align: left;
+}
+
+
+#registroForm input[type="text"],
+#registroForm input[type="number"],
+#registroForm input[type="email"],
+#registroForm select,
+#registroForm textarea {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border: 2px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: #1e293b;
+    background: #f1f5f9;
+    outline: none;
+}
+
+#registroForm input::placeholder,
+#registroForm textarea::placeholder {
+    color: #94a3b8;
+    font-style: italic;
+}
+
+
+
+#registroForm input[type="radio"],
+#registroForm input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #cbd5e1;
+    margin-right: 0.4rem;
+    vertical-align: middle;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+}
+
+#registroForm input[type="radio"] {
+    border-radius: 50%;
+}
+
+#registroForm input[type="checkbox"] {
+    border-radius: 4px;
+}
+
+#registroForm input[type="checkbox"]:checked {
+    border-color: #1088a0;
+    background: #1ac4d6;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+
+#registroForm fieldset div:has(input[name="terminos"]) {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+}
+
+#registroForm fieldset div:has(input[name="terminos"]) label {
+    display: inline-flex;
+    align-items: center;
+    font-weight: 400;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
+
+#registroForm fieldset div:last-child {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+}
+
+#registroForm button {
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.75rem 1.8rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#registroForm button[type="submit"] {
+    background: #0b7689;
+    color: white;
+    flex: 1;
+    max-width: 250px;
+}
+
+#registroForm button[type="reset"] {
+    background: transparent;
+    color: #64748b;
+    border: 2px solid #cbd5e1;
+    flex: 1;
+    max-width: 250px;
+}
+
+
+#registroForm label:has(+ input[required])::after,
+#registroForm label:has(+ select[required])::after {
+    content: ' *';
+    color: #d52d2d;
+    font-weight: 700;
+}
