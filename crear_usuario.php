@@ -1,3 +1,60 @@
+<?php
+session_start();
+require "conexion.php";
+
+$error = "";
+$exito = "";
+
+// Solo procesamos el alta si el formulario se envió por POST.
+// Si alguien abre la página con GET, baja directo al HTML y muestra el formulario vacío.
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    // Leemos lo que escribió el usuario. trim() saca espacios de los costados
+    $usuario = trim($_POST["usuario"]);
+    $dni = trim($_POST["dni"]);
+    $correo = trim($_POST["correo"]);
+    $password   = $_POST["password"];
+    $clave2  = $_POST["clave2"];
+
+    // Validación 1: ningún campo puede quedar vacío
+    if ($usuario === "" || $correo === ""|| $dni === ""|| $password === "" || $clave2 === "") {
+        $error = "Completá todos los campos.";
+
+    // Validación 2: las dos contraseñas deben ser idénticas
+    } elseif ($clave !== $clave2) {
+        $error = "Las contraseñas no coinciden.";
+
+    // Validación 3: largo mínimo de la contraseña
+    } elseif (strlen($clave) < 8) {
+        $error = "La contraseña debe tener al menos 8 caracteres.";
+
+         } elseif (strlen($pass) < 8) {
+        $error = "El DNI debe  tener al menos 8 caracteres.";
+
+    } else {
+        // ¿Ya existe ese nombre de usuario? El "?" es un marcador:
+        // el valor real viaja aparte y así se evita la inyección SQL
+        $busca = $conexionbd->prepare("SELECT id FROM usuarios WHERE usuario = ?");
+        $busca->execute([$usuario]);
+
+        // fetch() devuelve la fila si la encontró, o false si no existe
+        if ($busca->fetch()) {
+            $error = "Ese usuario ya está registrado.";
+        } else {
+            // Convierte la contraseña en un hash irreversible.
+            // En la base NUNCA se guarda la contraseña en texto plano.
+            $hash = password_hash($clave, PASSWORD_DEFAULT);
+
+            // INSERT con dos marcadores: los valores van en un array aparte
+            $alta = $conexionbd->prepare("INSERT INTO usuarios (usuario, clave) VALUES (?, ?)");
+            $alta->execute([$usuario, $hash]);
+
+            $exito = "Usuario creado correctamente.";
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>

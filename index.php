@@ -33,7 +33,7 @@ if (isset($_SESSION["usuario"])) {
 
                 <div>
                     <label for="contraseña">Contraseña</label>
-                    <input type="text" id="contraseña" name="pass" placeholder="Ej: h00la123" required>
+                    <input type="text" id="password" name="password" placeholder="Ej: h00la123" required>
                 </div>
 
 
@@ -41,7 +41,9 @@ if (isset($_SESSION["usuario"])) {
                 <div>
                     <button type="submit">Confirmar</button>
                     <button type="reset">Crear Cuenta</button>
+                    <a href="crear_usuario.php" class="btnbtn-outline-secondaryw-100">Crear usuario</a>
                 </div>
+
 
         </form>
     </div>
