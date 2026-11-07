@@ -34,8 +34,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } else {
         // ¿Ya existe ese nombre de usuario? El "?" es un marcador:
         // el valor real viaja aparte y así se evita la inyección SQL
-        $busca = $conexionbd->prepare("SELECT id FROM usuarios WHERE usuario = ?");
-        $busca->execute([$usuario]);
+        $busca = $conexionbd->prepare("SELECT id FROM usuarios WHERE dni = ? OR correo = ?");
+        $busca->execute([$dni,$correo]);
 
         // fetch() devuelve la fila si la encontró, o false si no existe
         if ($busca->fetch()) {
@@ -46,8 +46,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $hash = password_hash($clave, PASSWORD_DEFAULT);
 
             // INSERT con dos marcadores: los valores van en un array aparte
-            $alta = $conexionbd->prepare("INSERT INTO usuarios (usuario, clave) VALUES (?, ?)");
-            $alta->execute([$usuario, $hash]);
+            $alta = $conexionbd->prepare("INSERT INTO usuarios (usuario, dni, corrreo , password, rol ) VALUES (?, ?, ?, ?, 'usuario')");
+            $alta->execute([$usuario,$dni,$correo, $hash]);
 
             $exito = "Usuario creado correctamente.";
         }

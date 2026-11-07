@@ -40,8 +40,9 @@ if (isset($_SESSION["usuario"])) {
                 
                 <div>
                     <button type="submit">Confirmar</button>
-                    <button type="reset">Crear Cuenta</button>
-                    <a href="crear_usuario.php" class="btnbtn-outline-secondaryw-100">Crear usuario</a>
+                    <a href="crear_usuario.php">
+    <button type="button">Crear Cuenta</button>
+</a>
                 </div>
 
 
