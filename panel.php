@@ -23,6 +23,8 @@ if (!isset($_SESSION["usuario"])) {
             <span class="navbar-brand mb-0 h1">Mi Panel</span>
             
             <a href="logout.php" class="btn btn-light btn-sm">Salir</a>
+            #aca tenes que poner este codigo <a href="logout.php" class="btn btn-light btn-sm">administrar cuentas</a> que solo lo tiene que ver el administrador 
+            #el usuario deberia ver otro  boton <a href="logout.php" class="btn btn-light btn-sm">tu cuenta</a>
         </div>
     </nav>
 

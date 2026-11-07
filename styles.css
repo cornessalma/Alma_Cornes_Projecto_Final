@@ -65,6 +65,7 @@ body {
 #registroForm input[type="text"],
 #registroForm input[type="number"],
 #registroForm input[type="email"],
+#registroForm input[type="password"],
 #registroForm select,
 #registroForm textarea {
     width: 100%;

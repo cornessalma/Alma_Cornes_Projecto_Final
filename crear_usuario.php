@@ -10,32 +10,32 @@ $exito = "";
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Leemos lo que escribió el usuario. trim() saca espacios de los costados
-    $usuario = trim($_POST["usuario"]);
-    $dni = trim($_POST["dni"]);
-    $correo = trim($_POST["correo"]);
-    $password   = $_POST["password"];
-    $clave2  = $_POST["clave2"];
+    $nombre = trim($_POST["nombre"]?? "");
+    $dni = trim($_POST["dni"]?? "");
+    $correo = trim($_POST["correo"]?? "");
+    $password   = $_POST["password"]?? "";
+    $clave2  = $_POST["clave2"]?? "";
 
     // Validación 1: ningún campo puede quedar vacío
-    if ($usuario === "" || $correo === ""|| $dni === ""|| $password === "" || $clave2 === "") {
+    if ($nombre  === "" || $correo === ""|| $dni === ""|| $password === "" || $clave2 === "") {
         $error = "Completá todos los campos.";
 
     // Validación 2: las dos contraseñas deben ser idénticas
-    } elseif ($clave !== $clave2) {
+    } elseif ($password !== $clave2) {
         $error = "Las contraseñas no coinciden.";
 
     // Validación 3: largo mínimo de la contraseña
-    } elseif (strlen($clave) < 8) {
+    } elseif (strlen($password) < 8) {
         $error = "La contraseña debe tener al menos 8 caracteres.";
 
-         } elseif (strlen($pass) < 8) {
+         } elseif (!preg_match('/^\d{7,8}$/', $dni)) {
         $error = "El DNI debe  tener al menos 8 caracteres.";
 
     } else {
         // ¿Ya existe ese nombre de usuario? El "?" es un marcador:
         // el valor real viaja aparte y así se evita la inyección SQL
-        $busca = $conexionbd->prepare("SELECT id FROM usuarios WHERE dni = ? OR correo = ?");
-        $busca->execute([$dni,$correo]);
+        $busca = $conexionbd->prepare("SELECT id FROM registro WHERE dni = ? OR correo = ? OR nombre = ?");
+        $busca->execute([$dni,$correo,$nombre]);
 
         // fetch() devuelve la fila si la encontró, o false si no existe
         if ($busca->fetch()) {
@@ -43,13 +43,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         } else {
             // Convierte la contraseña en un hash irreversible.
             // En la base NUNCA se guarda la contraseña en texto plano.
-            $hash = password_hash($clave, PASSWORD_DEFAULT);
+            $hash = password_hash($password, PASSWORD_DEFAULT);
 
             // INSERT con dos marcadores: los valores van en un array aparte
-            $alta = $conexionbd->prepare("INSERT INTO usuarios (usuario, dni, corrreo , password, rol ) VALUES (?, ?, ?, ?, 'usuario')");
-            $alta->execute([$usuario,$dni,$correo, $hash]);
+           $alta = $conexionbd->prepare("INSERT INTO registro (nombre, dni, correo, password) VALUES (?, ?, ?, ?)");
+            $alta->execute([$nombre, $dni, $correo, $hash]);
 
             $exito = "Usuario creado correctamente.";
+
+            $_SESSION["usuario"] = $nombre;
+            $_SESSION["rol"] = "usuario";
+            header("Location: panel.php");
+            exit;
         }
     }
 }
@@ -60,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio de Sesión</title>
+    <title>Registro</title>
 
     <link rel="stylesheet" href="styles.css">
 
@@ -69,9 +74,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
     <div class="registro-card">
-        <h1>Inicio de Sesión</h1>
+        <h1>Registro</h1>
 
-        <form action="#" method="POST" id="registroForm">
+        <form action="crear_usuario.php" method="POST" id="registroForm">
             <fieldset>
 
                 <div>
@@ -81,25 +86,30 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
                 <div>
-                    <label for="contraseña">Contraseña</label>
-                    <input type="text" id="contraseña" name="pass" placeholder="Ej: h00la123" required>
-                </div>
-
-                <div>
                     <label for="correo">Correo electronico</label>
                     <input type="email" id="correo" name="correo" placeholder="Ej: nombreapellido@gmail.com" required>
                 </div>
 
                 <div>
-                    <label for="DNI">DNI</label>
+                    <label for="dni">DNI</label>
                     <input type="text" id="dni" name="dni" placeholder="Ej: h00la123" required>
                 </div>
+
+                <div>
+    <label for="password">Contraseña </label>
+    <input type="text" id="password" name="password" placeholder="12345678 " required>
+</div>
+
+<div>
+    <label for="clave2">Repetir Contraseña </label>
+    <input type="text" id="clave2" name="clave2" placeholder="12345678 " required>
+</div>
                 
                 <div>
                     <button type="submit">Confirmar</button>
-                    <button type="reset">Crear Cuenta</button>
+                    
                 </div>
-
+</fieldset>
         </form>
     </div>
 

@@ -22,7 +22,7 @@ if (isset($_SESSION["usuario"])) {
     <div class="registro-card">
         <h1>Inicio de Sesión</h1>
 
-        <form action="#" method="POST" id="registroForm">
+        <form action="login.php" method="POST" id="registroForm">
             <fieldset>
 
                 <div>

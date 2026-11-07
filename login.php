@@ -2,27 +2,29 @@
 session_start();
 require "conexion.php";
 
-
-$usuario = $_POST["nombre"] ?? "";
-$password    = $_POST["password"] ?? "";
-
-
-$consulta = $conexionbd->prepare("SELECT * FROM usuarios WHERE nombre = ?");
-$consulta->execute([$usuario]);
-$fila = $consulta->fetch(); 
-
-
-
-
-if (password_verify($pass, $fila["pass"])) {
-    
-    $_SESSION["usuario"] = $fila["nombre"];
-    $_SESSION["usuario_rol"] = $fila["rol"];
-    header("Location: panel.php");
-    exit;
-} 
-else {
-    header("Location: index.php?error=1");
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    header("Location: index.php");
     exit;
 }
-?>
+
+$usuario  = trim($_POST["nombre"] ?? "");
+$password = $_POST["password"] ?? "";
+
+// Solo usuarios no archivados
+$consulta = $conexionbd->prepare(
+    "SELECT nombre, password, rol FROM registro
+     WHERE nombre = ? AND fecha_archivado IS NULL"
+);
+$consulta->execute([$usuario]);
+$fila = $consulta->fetch();
+
+if ($fila && password_verify($password, $fila["password"])) {
+    session_regenerate_id(true);
+    $_SESSION["usuario"] = $fila["nombre"];
+    $_SESSION["rol"]     = $fila["rol"];
+    header("Location: panel.php");
+    exit;
+}
+
+header("Location: index.php?error=1");
+exit;
