@@ -43,7 +43,7 @@ CREATE TABLE `registro` (
 --
 
 INSERT INTO `registro` (`id`, `nombre`, `dni`, `correo`, `password`, `rol`, `fecha_creacion`, `fecha_archivado`) VALUES
-(1, 'alma', '68908765', 'loca@gmail.com', '$2y$10$3w9W3ZQpSZIrgJ/lVQNQxegBvcRou0XJaVAVr.VqWi5', 'usuario', '2026-11-07 19:28:20', NULL),
+(1, 'alma', '68908765', 'alma@gmail.com', '$2y$10$3w9W3ZQpSZIrgJ/lVQNQxegBvcRou0XJaVAVr.VqWi5', 'usuario', '2026-11-07 19:28:20', NULL),
 (2, 'demian', '67890323', 'demian@gmail.com', '$2y$10$sVkIJH6S3ZvSjNpChJsr1e9YIW/E5Cq/fjNmECti7dZ2bSvOlR3JS', 'usuario', '2026-11-07 20:01:43', NULL),
 (3, 'Alma Cornes', '34567890', 'alma@gmail.com', '$2y$10$ChfDPt9Clxu8xOSfQR2fN.X4BWAu9K3ZXD7Oscnu4xgCnIvN1iG.W', 'admin', '2026-11-07 20:03:51', NULL);
 
