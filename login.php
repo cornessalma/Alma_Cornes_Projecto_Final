@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 $usuario  = trim($_POST["nombre"] ?? "");
 $password = $_POST["password"] ?? "";
 
-// Solo usuarios no archivados
+
 $consulta = $conexionbd->prepare(
     "SELECT nombre, password, rol FROM registro
      WHERE nombre = ? AND fecha_archivado IS NULL"

@@ -24,11 +24,10 @@ body {
 .registro-card h1 {
     font-size: 2rem;
     font-weight: 700;
-    color: #357e99;
+    color: #e60023; 
     margin-bottom: 0.25rem;
     text-align: center;
 }
-
 
 .registro-card h1 + p {
     text-align: center;
@@ -37,13 +36,11 @@ body {
     font-size: 0.95rem;
 }
 
-
 #registroForm fieldset {
-    border: 2px solid #3f78c3;
+    border: 2px solid #e60023; 
     border-radius: 10px;
     padding: 1.5rem;
 }
-
 
 #registroForm fieldset > div {
     margin-bottom: 1.2rem;
@@ -51,8 +48,12 @@ body {
 
 #registroForm fieldset > div:last-child {
     margin-bottom: 0;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
 }
-
 
 #registroForm label {
     font-weight: 600;
@@ -61,13 +62,11 @@ body {
     text-align: left;
 }
 
-
 #registroForm input[type="text"],
-#registroForm input[type="number"],
+#registroForm input[type="search"],
 #registroForm input[type="email"],
 #registroForm input[type="password"],
-#registroForm select,
-#registroForm textarea {
+#registroForm select {
     width: 100%;
     padding: 0.7rem 1rem;
     border: 2px solid #cbd5e1;
@@ -79,67 +78,9 @@ body {
     outline: none;
 }
 
-#registroForm input::placeholder,
-#registroForm textarea::placeholder {
+#registroForm input::placeholder {
     color: #94a3b8;
     font-style: italic;
-}
-
-
-
-#registroForm input[type="radio"],
-#registroForm input[type="checkbox"] {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 18px;
-    height: 18px;
-    border: 2px solid #cbd5e1;
-    margin-right: 0.4rem;
-    vertical-align: middle;
-    cursor: pointer;
-    position: relative;
-    flex-shrink: 0;
-}
-
-#registroForm input[type="radio"] {
-    border-radius: 50%;
-}
-
-#registroForm input[type="checkbox"] {
-    border-radius: 4px;
-}
-
-#registroForm input[type="checkbox"]:checked {
-    border-color: #1088a0;
-    background: #1ac4d6;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-
-
-#registroForm fieldset div:has(input[name="terminos"]) {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 0;
-}
-
-#registroForm fieldset div:has(input[name="terminos"]) label {
-    display: inline-flex;
-    align-items: center;
-    font-weight: 400;
-    font-size: 0.9rem;
-    margin-bottom: 0;
-}
-
-
-#registroForm fieldset div:last-child {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 0.5rem;
 }
 
 #registroForm button {
@@ -156,13 +97,17 @@ body {
 }
 
 #registroForm button[type="submit"] {
-    background: #0b7689;
+    background: #e60023; 
     color: white;
     flex: 1;
     max-width: 250px;
 }
 
-#registroForm button[type="reset"] {
+#registroForm button[type="submit"]:hover {
+    background: #ad081b;
+}
+
+#registroForm button[type="button"] {
     background: transparent;
     color: #64748b;
     border: 2px solid #cbd5e1;
@@ -170,11 +115,199 @@ body {
     max-width: 250px;
 }
 
-
 #registroForm label:has(+ input[required])::after,
 #registroForm label:has(+ select[required])::after {
     content: ' *';
-    color: #d52d2d;
+    color: #e60023;
     font-weight: 700;
 }
 
+
+.contenedor {
+    width: 100%;
+    max-width: 1150px;
+    margin: 0 auto;
+}
+
+.hero {
+    background-color: #e60023;
+    border-radius: 6px;
+    padding: 16px 24px;
+    margin-bottom: 16px;
+    min-height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hero-text h1 {
+    font-size: 32px;
+    color: #ffffff;
+    margin-bottom: 0;
+    letter-spacing: -1px; 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 500; 
+}
+
+.hero-image {
+    width: 160px;        
+    height: 70px;        
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+
+.header {
+    width: 100%;
+    padding: 15px 0;
+    background-color: transparent;
+}
+
+.menuinicio {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent; 
+    border: none;                             
+    box-shadow: none;               
+}
+
+.botonmenu {
+    flex: 1;                         
+    text-align: center;           
+    padding: 10px 0;
+    color: #333333;
+    text-decoration: underline;    
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    border: none;                             
+    transition: color 0.2s ease;
+}
+
+.botonmenu:hover {
+    background-color: transparent;
+    color: #e60023;
+}
+
+.cajasmedio {
+    background-color: #ffffff; 
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 16px;
+}
+
+.titulo-seccion {
+    color: #e60023;
+    font-size: 23px;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.cajas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.caja {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 12px;
+    flex: 1;
+    min-width: 220px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.imagen-caja {
+    height: 280px; 
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 9px;
+    overflow: hidden;
+    background-color: #f1f5f9;
+}
+
+.imagen-caja img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+
+.caja h2 {
+    font-size: 15px;
+    margin-bottom: 8px;
+    color: #111111;
+}
+
+.caja p {
+    color: #5f5f5f;
+    font-size: 12px;
+    line-height: 1.4;
+    min-height: 34px;
+    margin-bottom: 10px;
+}
+
+.caja button {
+    display: inline-block;
+    background-color: #e60023;  
+    color: #ffffff;             
+    border: 1px solid #e60023;     
+    border-radius: 30px;        
+    padding: 6px 16px;          
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;            
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.caja button:hover {
+    background-color: #ad081b;
+    transform: scale(1.05);
+} 
+
+footer {
+    background-color: #111111;
+    border-radius: 6px;
+    padding: 16px;
+}
+
+.footer-flex {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background-color: #ffffff; 
+    border: 1px solid #ccc;   
+    border-radius: 5px;      
+    padding: 16px;            
+}
+
+.footer-columna {
+    flex: 1;
+    min-width: 170px;
+    background-color: transparent; 
+    border: none;                            
+    padding: 0;                                
+}
+
+.footer-columna h3 {
+    font-size: 12px;
+    margin-bottom: 8px;
+    color: #111111;
+}
+
+.footer-columna p {
+    color: #777;
+    font-size: 11px;
+}
