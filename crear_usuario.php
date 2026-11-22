@@ -29,7 +29,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         } else {
             $hash = password_hash($password, PASSWORD_DEFAULT);
 
-            // Se envía '-' en dni para cumplir con la columna de la tabla sin pedirlo en el formulario
             $alta = $conexionbd->prepare("INSERT INTO registro (nombre, dni, correo, password) VALUES (?, ?, ?, ?)");
             $alta->execute([$nombre, '-', $correo, $hash]);
 
